@@ -4,54 +4,39 @@ import createConnection, TextDocuments, InitializeParams, InitializeResult, Docu
 import TextDocument, Diagnostic, Range, Position,DiagnosticSeverity from 'vscode-languageserver-types'
 import Uri from 'vscode-uri'
 
+# , SymbolKind, SymbolInformation
+
 var imbac = require 'imba/src/compiler/compiler'
 
 class DiagnosticsAdapter
-
-	def varToDecoration doc, item,loc
-		var range = locToRange(doc,loc)
-		range:name = item:name
-		return {
-			range: range
-			options: {
-				inlineClassName: 'lvar'
-				hoverMessage: "Variable"
-				name: item:name or 'itemname'
-				linesDecorationsClassName: 'helloz'
-			}
-		}
 	
-	def warningToMarker doc, original
-		var item = locToRange(doc, original:loc)
-		item:severity = 3
-		item:message = original:message
-		return item
+	def locToRange doc, loc
+		{start: doc.positionAt(loc[0]), end: doc.positionAt(loc[1])}
+		
+	def getVariables meta, doc
+		let vars = []
+		
+		for scope in meta:scopes
+			for item in scope:vars
+				for ref in item:refs
+					vars.push({
+						name: item:name
+						type: item:type
+						range: locToRange(doc,ref:loc)
+					})
+		return vars
 
-	def warningToDecoration model, orig
-		var range = locToRange(model, orig:loc)
-		return {
-			range: range
-			options: {
-				name: 'error'
-				linesDecorationsClassName: 'error'
-			}
-		}
 		
 	def getDiagnostics meta, doc
 		var items = []
 
 		for warn in meta:warnings
-			let loc = warn.loc
-			
 			let item = {
 				severity: DiagnosticSeverity.Error
 				message: warn:message
-				range: {
-					start: doc.positionAt(loc[0])
-					end: doc.positionAt(loc[1])
-				}
+				range: locToRange(doc,warn.loc)
 			}
-			console.log("handle warning",warn,item)
+			# console.log("handle warning",warn,item)
 			items.push(item)
 			
 		return items
@@ -69,13 +54,13 @@ documents.listen(connection)
 
 connection.onInitialize do |params|
 	console.log "connection.onInitialize"
-	connection:console.log "hello?"
+	# connection:console.log "hello?"
 	
 	return {
 		capabilities: {
 			# Tell the client that the server works in FULL text document sync mode
 			textDocumentSync: documents:syncKind,
-			completionProvider: { resolveProvider: true, triggerCharacters: ['.', ':', '<', '"', '/', '@', '*'] },
+			completionProvider: { resolveProvider: false, triggerCharacters: ['.', ':', '<', '"', '/', '@', '*'] },
 			signatureHelpProvider: { triggerCharacters: ['('] },
 			documentRangeFormattingProvider: false,
 			hoverProvider: false,
@@ -104,12 +89,16 @@ documents.onDidChangeContent do |change|
 	console.log "server.onDidChangeContent"
 	let doc = change:document
 	let code = doc.getText
-	let diagnostics = []
 	let meta = imbac.analyze(code,{entities: yes})
 	let diagnostics = adapter.getDiagnostics(meta,doc)
 	
 	if diagnostics.len
 		connection.sendDiagnostics({ uri: doc:uri, diagnostics: diagnostics })
+	else
+		connection.sendDiagnostics({ uri: doc:uri, diagnostics: [] })
+		let vars = adapter.getVariables(meta,doc)
+		# console.log "found vars",vars
+		connection.sendNotification('entities',doc:uri,doc:version,vars)
 	# documents.onDidChangeContent((change) => {
 	#     let diagnostics: Diagnostic[] = [];
 	#     let lines = change.document.getText().split(/\r?\n/g);
