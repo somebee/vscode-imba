@@ -1,0 +1,34 @@
+{
+    "name": "imba",
+    "displayName": "vscode-imba",
+    "description": "Language support for Imba",
+    "version": "0.0.1",
+    "publisher": "scrimba",
+    "main": "./out/extension.js",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+    "onLanguage:imba"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "imba",
+            "aliases": ["Imba", "imba"],
+            "extensions": [".imba"],
+            "configuration": "./language-configuration.json",
+            "firstLine": "^#!/.*\\bimba[0-9.-]*\\b"
+        }],
+        "grammars": [{
+            "language": "imba",
+            "scopeName": "source.imba",
+            "path": "./syntaxes/imba.tmLanguage"
+        }]
+    },
+    "dependencies": {
+        "vscode-languageserver": "^2.6.2"
+    }
+}
