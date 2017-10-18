@@ -3,6 +3,15 @@
     "version": "0.1.0",
     "configurations": [
         {
+            "name": "Attach to Server",
+			"type": "node",
+			"request": "attach",
+			"port": 6005,
+            "sourceMaps": true,
+            "protocol": "inspector",
+            "outFiles": ["${workspaceRoot}/server/**/*.js"]
+        },
+        {
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",

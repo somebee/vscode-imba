@@ -4,7 +4,7 @@
     "description": "Language support for Imba",
     "version": "0.0.1",
     "publisher": "scrimba",
-    "main": "./out/extension.js",
+    "main": "./client/index.js",
     "engines": {
         "vscode": "^1.5.0"
     },
@@ -12,23 +12,44 @@
         "Languages"
     ],
     "activationEvents": [
-    "onLanguage:imba"
+        "onLanguage:imba"
     ],
+    "configuration": {
+        "type": "object",
+        "title": "Example configuration",
+        "properties": {
+            "imba.maxNumberOfProblems": {
+                "type": "number",
+                "default": 100,
+                "description": "Controls the maximum number of problems produced by the server."
+            }
+        }
+    },
     "contributes": {
-        "languages": [{
-            "id": "imba",
-            "aliases": ["Imba", "imba"],
-            "extensions": [".imba"],
-            "configuration": "./language-configuration.json",
-            "firstLine": "^#!/.*\\bimba[0-9.-]*\\b"
-        }],
-        "grammars": [{
-            "language": "imba",
-            "scopeName": "source.imba",
-            "path": "./syntaxes/imba.tmLanguage"
-        }]
+        "languages": [
+            {
+                "id": "imba",
+                "aliases": [
+                    "Imba",
+                    "imba"
+                ],
+                "extensions": [
+                    ".imba"
+                ],
+                "configuration": "./language-configuration.json",
+                "firstLine": "^#!/.*\\bimba[0-9.-]*\\b"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "imba",
+                "scopeName": "source.imba",
+                "path": "./syntaxes/imba.tmLanguage"
+            }
+        ]
     },
     "dependencies": {
+        "imba": "^1.0.0",
         "vscode-languageserver": "^2.6.2"
     }
 }

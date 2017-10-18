@@ -1,0 +1,32 @@
+{
+  "name": "imba-language-server",
+  "description": "imba-language-server",
+  "version": "0.1.0",
+  "author": "Sindre Aarsaether <sindre@identu.no>",
+  "license": "MIT",
+  "main": "index.js",
+  "bin": {
+    "vls": "./bin/vls"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "dependencies": {
+    "imba": "^1.0.0",
+    "vscode-languageserver": "^3.4.2",
+    "vscode-uri": "^1.0.1"
+  },
+  "devDependencies": {
+    "glob": "^7.1.2",
+    "source-map-support": "^0.4.15"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "watch": "tsc --watch",
+    "test": "mocha"
+  }
+}
