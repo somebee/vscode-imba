@@ -51,12 +51,16 @@ export def activate context
 	context:subscriptions.push(disposable)
 	
 	client.onReady.then do
-		console.log "client is ready!!"
+		# console.log "client is ready!!"
 
 		client.onNotification('entities') do |uri,version,markers|
 			let editor = adapter.uriToEditor(uri,version)
 			
 			return unless editor
+
+			var styles = {
+			}
+
 			
 			var decorations = for marker in markers
 				{
@@ -65,22 +69,11 @@ export def activate context
 					renderOptions: {
 						dark: {
 							color: '#f3f1d5'
-							textDecoration: "border-bottom: 2px solid whitesmoke;"
 						}
-						# before: {
-						# 	contentText: "var"
-						# 	color: "purple"
-						# }
 					}
-					# options: {
-					# 	inlineClassName: 'lvar'
-					# 	hoverMessage: "Variable"
-					# 	name: marker:name or 'itemname'
-					# 	linesDecorationsClassName: 'helloz'
-					# }
 				}
 			
-			console.log "client.onNotification entities",uri,markers,decorations,version
+			# console.log "client.onNotification entities",uri,markers,decorations,version
 			editor.setDecorations("imba", decorations)
 			
 	
