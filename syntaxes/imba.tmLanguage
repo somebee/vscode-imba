@@ -217,7 +217,7 @@
 		<key>name</key>
 		<string>meta.tag.imba</string>
 		<key>begin</key>
-		<string>(\&lt;)(([a-z\-]+\:|\@|\.|\#)?([a-z][a-z\-\d]*))</string>
+		<string>(\&lt;)(([A-Za-z\-]+\:|\@|\.|\#)?([A-Za-z][a-z\-\d]*))</string>
 		<key>beginCaptures</key>
 		<dict>
 		<key>1</key>
@@ -835,7 +835,7 @@
 		
 		<dict>
 		<key>name</key>
-		<string>identifier.key.imba</string>
+		<string>meta.object-literal.key.imba</string>
 		<key>match</key>
 		<string>[\w\_]+(\-[\w\d\_]+)*[\?\!]?\:(\s|\[|$)</string>
 		</dict>
@@ -1203,7 +1203,7 @@
 <key>name</key>
 <string>entity.other.attribute-name.imba</string>
 <key>begin</key>
-<string>[a-z]+(\:[a-z]+)?\s*\=</string>
+<string>[a-z\-\d]+(\:[a-z\-]+)?\s*\=</string>
 <key>end</key>
 <string>((?=([\w\-\_\:]+)\s*\=)|(?=&gt;))</string>
 <key>patterns</key>

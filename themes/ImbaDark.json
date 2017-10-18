@@ -150,6 +150,15 @@
       }
     },
     {
+      "name": "identifier.key",
+      "scope": [
+        "identifier.key"
+      ],
+      "settings": {
+        "foreground": "#a7c9de"
+      }
+    },
+    {
       "name": "entity.name.type",
       "scope": [
         "entity.name.type"
