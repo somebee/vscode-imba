@@ -14,18 +14,18 @@
     "activationEvents": [
         "onLanguage:imba"
     ],
-    "configuration": {
-        "type": "object",
-        "title": "Example configuration",
-        "properties": {
-            "imba.maxNumberOfProblems": {
-                "type": "number",
-                "default": 100,
-                "description": "Controls the maximum number of problems produced by the server."
-            }
-        }
-    },
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Example configuration",
+            "properties": {
+                "imba.maxNumberOfProblems": {
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the server."
+                }
+            }
+        },
         "languages": [
             {
                 "id": "imba",
@@ -45,6 +45,13 @@
                 "language": "imba",
                 "scopeName": "source.imba",
                 "path": "./syntaxes/imba.tmLanguage"
+            }
+        ],
+        "themes": [
+            {
+                "label": "Imba Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/ImbaDark.json"
             }
         ]
     },
