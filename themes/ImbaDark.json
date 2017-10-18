@@ -150,6 +150,15 @@
       }
     },
     {
+      "name": "entity.name.type",
+      "scope": [
+        "entity.name.type"
+      ],
+      "settings": {
+        "foreground": "#75AAFF"
+      }
+    },
+    {
       "name": "entity.name.function",
       "scope": [
         "entity.name.function"
@@ -159,12 +168,30 @@
       }
     },
     {
-      "name": "entity.name.type.class.name",
+      "name": "entity.name.tag",
       "scope": [
-        "entity.name.type.class.name"
+        "entity.name.tag"
       ],
       "settings": {
-        "foreground": "#75AAFF"
+        "foreground": "#D9BB72"
+      }
+    },
+    {
+      "name": "storage.type.function",
+      "scope": [
+        "storage.type.function"
+      ],
+      "settings": {
+        "foreground": "#ea9b80"
+      }
+    },
+    {
+      "name": "storage.type.class",
+      "scope": [
+        "storage.type.class"
+      ],
+      "settings": {
+        "foreground": "#ea9b80"
       }
     },
     {
@@ -308,7 +335,7 @@
         "meta.tag"
       ],
       "settings": {
-        "foreground": "#d9bb72"
+        "foreground": "#D9BB72"
       }
     },
     {
