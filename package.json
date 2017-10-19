@@ -2,9 +2,10 @@
     "name": "imba",
     "displayName": "vscode-imba",
     "description": "Language support for Imba",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "scrimba",
     "main": "./client/index.js",
+    "icon": "./icon.png",
     "engines": {
         "vscode": "^1.5.0"
     },
