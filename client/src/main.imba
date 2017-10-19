@@ -67,9 +67,8 @@ export def activate context
 					range: marker:range
 					hoverMessage: "variable {marker:name}"
 					renderOptions: {
-						dark: {
-							color: '#f3f1d5'
-						}
+						dark: {color: '#f3f1d5'}
+						light: {color: '#509DB5'}
 					}
 				}
 			
