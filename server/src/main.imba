@@ -22,6 +22,7 @@ class DiagnosticsAdapter
 					vars.push({
 						name: item:name
 						type: item:type
+						scope: scope:type
 						range: locToRange(doc,ref:loc)
 					})
 		return vars

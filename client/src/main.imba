@@ -59,16 +59,17 @@ export def activate context
 			return unless editor
 
 			var styles = {
+				RootScope: ["#d6bdce","#509DB5"]
 			}
 
-			
 			var decorations = for marker in markers
+				let color = styles[marker:scope] or ['#dcdbc7','#509DB5']
 				{
 					range: marker:range
 					hoverMessage: "variable {marker:name}"
 					renderOptions: {
-						dark: {color: '#f3f1d5'}
-						light: {color: '#509DB5'}
+						dark: {color: color[0]} # f3f1d5
+						light: {color: color[1]}
 					}
 				}
 			
@@ -80,7 +81,11 @@ export def activate context
 	languages.setLanguageConfiguration('imba',{
 		wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\@\#%\^\&\*\(\)\=\$\-\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g,
 		onEnterRules: [{
-			beforeText: /^\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async|do).*?$/,
+			beforeText: /^\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?$/,
+			action: { indentAction: IndentAction.Indent }
+		},{
+			beforeText: /\s*(?:do)\s*(\|.*\|\s*)?$/,
+
 			action: { indentAction: IndentAction.Indent }
 		}]
 	})
