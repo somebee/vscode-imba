@@ -20,7 +20,8 @@
     "key": "a7c9de",
     "lineNumber": "3b4750",
     "agentCursor": "89b0fc",
-    "localCursor": "ffe796"
+    "localCursor": "ffe796",
+    "lvar": "dcdbc7"
   },
   "tokenColors": [
     {
@@ -215,6 +216,13 @@
     {
       "name": "constant.numeric",
       "scope": "constant.numeric",
+      "settings": {
+        "foreground": "#598DA6"
+      }
+    },
+    {
+      "name": "constant.language.boolean",
+      "scope": "constant.language.boolean",
       "settings": {
         "foreground": "#598DA6"
       }
