@@ -1,12 +1,10 @@
-console.log("Hello from server!!")
+# console.log("Hello from server!!")
 
 import createConnection, TextDocuments, InitializeParams, InitializeResult, DocumentRangeFormattingRequest, Disposable, DocumentSelector, RequestType from 'vscode-languageserver'
-import TextDocument, Diagnostic, Range, Position,DiagnosticSeverity from 'vscode-languageserver-types'
+import TextDocument, Diagnostic, Range, Position,DiagnosticSeverity,SymbolKind from 'vscode-languageserver-types'
 import Uri from 'vscode-uri'
 
-# , SymbolKind, SymbolInformation
-
-var imbac = require 'imba/src/compiler/compiler'
+import Service from './Service'
 
 class DiagnosticsAdapter
 	
@@ -27,7 +25,6 @@ class DiagnosticsAdapter
 					})
 		return vars
 
-		
 	def getDiagnostics meta, doc
 		var items = []
 
@@ -41,17 +38,31 @@ class DiagnosticsAdapter
 			items.push(item)
 			
 		return items
+
+	def getSymbols meta, doc
+		var items = []
+		for scope in meta:scopes
+			for item in scope:vars
+				for ref in item:refs
+					items.push({
+						name: item:name
+						type: item:type
+						scope: scope:type
+						range: locToRange(doc,ref:loc)
+					})
+		return vars
+
 		
 var adapter = DiagnosticsAdapter.new
 var connection = process:argv:length <= 2 ? createConnection(process:stdin, process:stdout) : createConnection()
 
-# console:log = connection:console:log.bind(connection:console)
-# console:error = connection:console:error.bind(connection:console)
 
 # Create a simple text document manager. The text document manager
 # supports full document sync only
 var documents = TextDocuments.new
 documents.listen(connection)
+
+var service = Service.new(connection,documents)
 
 connection.onInitialize do |params|
 	console.log "connection.onInitialize"
@@ -66,7 +77,7 @@ connection.onInitialize do |params|
 			documentRangeFormattingProvider: false,
 			hoverProvider: false,
 			documentHighlightProvider: false,
-			documentSymbolProvider: false,
+			documentSymbolProvider: true,
 			definitionProvider: false,
 			referencesProvider: false,
 			documentOnTypeFormattingProvider: {
@@ -78,47 +89,26 @@ connection.onInitialize do |params|
 
 connection.onDidChangeConfiguration do |change|
 	console.log "connection.onDidChangeConfiguration"
-	# config = change.settings;
-	# vls.configure(config);
-	# // Update formatting setting
-	# veturFormattingOptions = config.vetur.format;
-	# documents.all().forEach(triggerValidation);
-	# const documentSelector = [{ language: 'vue' }];
-	# formatterRegistration = connection.client.register(vscode_languageserver_1.DocumentRangeFormattingRequest.type, { documentSelector });
+
+connection.onDocumentSymbol do |documentSymbolParms|
+	# var document = documents.get(documentSymbolParms:textDocument:uri)
+	# console.log "onDocumentSymbol!!!"
+	let uri = documentSymbolParms:textDocument:uri
+	let model = service.getModel(uri)
+	return model.symbols
 
 documents.onDidChangeContent do |change|
 	console.log "server.onDidChangeContent"
 	let doc = change:document
-	let code = doc.getText
-	let meta = imbac.analyze(code,{entities: yes})
+	let model = service.getModel(doc:uri)
+	let meta = model.entities
 	let diagnostics = adapter.getDiagnostics(meta,doc)
-	
+
 	if diagnostics.len
 		connection.sendDiagnostics({ uri: doc:uri, diagnostics: diagnostics })
 	else
 		connection.sendDiagnostics({ uri: doc:uri, diagnostics: [] })
 		let vars = adapter.getVariables(meta,doc)
-		# console.log "found vars",vars
 		connection.sendNotification('entities',doc:uri,doc:version,vars)
-	# documents.onDidChangeContent((change) => {
-	#     let diagnostics: Diagnostic[] = [];
-	#     let lines = change.document.getText().split(/\r?\n/g);
-	#     lines.forEach((line, i) => {
-	#         let index = line.indexOf('typescript');
-	#         if (index >= 0) {
-	#             diagnostics.push({
-	#                 severity: DiagnosticSeverity.Warning,
-	#                 range: {
-	#                     start: { line: i, character: index},
-	#                     end: { line: i, character: index + 10 }
-	#                 },
-	#                 message: `${line.substr(index, 10)} should be spelled TypeScript`,
-	#                 source: 'ex'
-	#             });
-	#         }
-	#     })
-	#     // Send the computed diagnostics to VS Code.
-	#     connection.sendDiagnostics({ uri: change.document.uri, diagnostics });
-	# })
 
 connection.listen
