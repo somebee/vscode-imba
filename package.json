@@ -2,7 +2,7 @@
     "name": "imba",
     "displayName": "vscode-imba",
     "description": "Language support for Imba",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "scrimba",
     "main": "./client/index.js",
     "icon": "icon.png",
