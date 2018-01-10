@@ -1,7 +1,7 @@
 {
   "name": "imba-client",
   "description": "imba language client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Sindre Aarsaether <sindre@identu.no>",
   "engines": {
     "vscode": "^1.16.0"
