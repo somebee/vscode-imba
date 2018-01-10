@@ -130,6 +130,13 @@
       }
     },
     {
+      "name": "entity.name.property",
+      "scope": "entity.name.property",
+      "settings": {
+        "foreground": "#75AAFF"
+      }
+    },
+    {
       "name": "entity.name.tag",
       "scope": "entity.name.tag",
       "settings": {

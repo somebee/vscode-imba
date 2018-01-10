@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-imba@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/imba/-/imba-1.0.0.tgz#9c8783e9a624c8138aebe9096417d39a6fe703cb"
+imba@^1.1.0-beta.1:
+  version "1.1.0-beta.1"
+  resolved "https://registry.yarnpkg.com/imba/-/imba-1.1.0-beta.1.tgz#1dbe0eb382f2b660d270c3d56f0c48b4e136bd64"
 
 vscode-jsonrpc@^2.4.0:
   version "2.4.0"

@@ -60,16 +60,18 @@ export def activate context
 
 			var styles = {
 				RootScope: ["#d6bdce","#509DB5"]
+				"import": ['#91b7ea','#91b7ea']
 			}
 
 			var decorations = for marker in markers
-				let color = styles[marker:scope] or ['#dcdbc7','#509DB5']
+				let color = styles[marker:type] or styles[marker:scope] or ['#dcdbc7','#509DB5']
 				{
 					range: marker:range
 					hoverMessage: "variable {marker:name}"
 					renderOptions: {
 						dark: {color: color[0]} # f3f1d5
 						light: {color: color[1]}
+						rangeBehavior: 1
 					}
 				}
 			
