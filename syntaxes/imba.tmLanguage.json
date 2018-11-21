@@ -253,7 +253,7 @@
             "7": {"name": "entity.other.superclass.imba"}
         }
     },{
-        "match": "\\s*(property|prop) (([a-z\\_][\\w\\_]*)(\\-[\\d\\w\\_]+)*)?",
+        "match": "\\s*(prop|attr) (([a-z\\_][\\w\\_]*)(\\-[\\d\\w\\_]+)*)?",
         "name": "meta.property.imba",
         "captures": {
             "1": {"name": "keyword.control.property.imba"},
@@ -267,7 +267,7 @@
             "4": {"name": "entity.name.function.imba"},
             "5": {"name": "meta.function.owner.imba"}
         },
-        "begin": "^([ \t]*)(local\\s|export\\s|global\\s)*(def)\\s(([A-Za-z][A-Za-z0-9_]*[\\.\\#])?([A-Za-z\\_][A-Za-z0-9_\\-]*[\\=\\?\\!]?))(?=([\\s\t]|$))",
+        "begin": "^([ \t]*)(local\\s|export\\s|global\\s|var\\s)*(def)\\s(([A-Za-z][A-Za-z0-9_]*[\\.\\#])?([A-Za-z\\_][A-Za-z0-9_\\-]*[\\=\\?\\!]?))(?=([\\s\t]|$))",
         "patterns": [{ "include": "$self" }],
         "name": "meta.function.method.imba",
         "end": "($|\\b(do)\\b)",
@@ -276,11 +276,14 @@
         },
         "contentName": "variable.parameter.function.imba"
     },{
-        "match": "\\b(initialize|new|include|extend|raise|attr_reader|attr_writer|attr_accessor|attr|private|module_function|public|protected|prop|property)\\b",
+        "match": "\\b(initialize|new|include|extend|raise|private|public|protected|prop|property)\\b",
         "name": "keyword.other.special.method.imba"
     },{
-        "match": "\\b(log|setInterval|setTimeout)\\b",
+        "match": "\\b(log|setInterval|setTimeout|isNaN|clearInterval|clearTimeout)\\b",
         "name": "support.function.imba"
+    },{
+        "match": "(\\$\\d+)",
+        "name": "support.variable.imba"
     },{
         "match": "(\\.)@[A-Z\\_a-z\\d][\\w\\_\\d]*(\\-[A-Z\\_a-z\\d]+)*",
         "name": "accessor.ivar.imba",

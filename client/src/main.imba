@@ -83,11 +83,10 @@ export def activate context
 	languages.setLanguageConfiguration('imba',{
 		wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\@\#%\^\&\*\(\)\=\$\-\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/g,
 		onEnterRules: [{
-			beforeText: /^\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?$/,
+			beforeText: /^\s*(?:var def|let def|export def|def|export class|class|for|if|elif|else|while|try|with|finally|except|async).*?$/,
 			action: { indentAction: IndentAction.Indent }
 		},{
 			beforeText: /\s*(?:do)\s*(\|.*\|\s*)?$/,
-
 			action: { indentAction: IndentAction.Indent }
 		}]
 	})
