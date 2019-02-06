@@ -8,7 +8,8 @@
 
 ### SFC (single file component) support
 
-A powerful idea from Vue is the SFC (single file component). These are
+A powerful idea from [Vue](https://vuejs.org) is the
+[SFC (single file component)](https://vuejs.org/v2/guide/single-file-components.html). These are
 files that have a section for the HTML called the `template`, another
 section for the JS called the `script`, and multiple CSS sections that
 are indicated by `style` sections. Each of these supports multiple
