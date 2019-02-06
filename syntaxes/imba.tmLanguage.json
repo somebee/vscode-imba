@@ -1,408 +1,795 @@
 {
-	"repository": {
-		"nest_curly": {
-			"patterns": [{
-                "patterns": [{ "include": "#nest_curly" }],
-                "end": "\\}",
-                "begin": "\\{",
-                "captures": {
-                    "0": {"name": "punctuation.section.scope.imba"}
-                }
-            }]
-		},
-		"selector_content": {
-			"patterns": [{
-                "match": "\\.[A-Za-z_\\-][\\w_\\-\\d]*\\b",
-                "name": "meta.selector.class.imba"
-            }]
-		},
-		"regex_content": {
-			"patterns": [{
-                "match": "GROUP",
-                "name": "string.regex.group.imba"
-            },{
-                "match": "\\\\([0-7]{1,3}|x[\\da-fA-F]{1,2}|\\/|.)",
-                "name": "string.regex.escaped.imba"
-            }]
-		},
-		"tag_imba": {
-			"patterns": [{
-                "name": "entity.name.tag.class.evaled.imba",
-                "end": "\\}",
-                "begin": "\\.\\{",
-                "patterns": [{ "include": "$self" }]
-            },{
-                "name": "entity.name.tag.id.evaled.imba",
-                "end": "\\}",
-                "begin": "#\\{",
-                "patterns": [{ "include": "$self" }]
-            },{
-                "name": "entity.name.tag.object.imba",
-                "end": "\\]",
-                "begin": "\\[",
-                "patterns": [{ "include": "$self" }]
-            },{
-                "match": "#[a-z]*",
-                "name": "entity.name.tag.id.imba"
-            },{
-                "match": "\\.[A-Za-z\\-\\_\\d]*",
-                "name": "entity.name.tag.class.imba"
-            },{
-                "match": "\\@[A-Za-z\\-\\_\\d]*",
-                "name": "entity.name.tag.ref.imba"
-            },{
-                "name": "entity.other.attribute-name.imba",
-                "end": "((?=([\\w\\-\\_\\:]+)\\s*\\=)|(?=>))",
-                "begin": "[a-z\\-\\d]+(\\:[a-z\\-]+)?\\s*\\=",
-                "patterns": [{ "include": "$self" }]
-            }]
-		},
-		"escaped_char": {
-			"patterns": [{
-                "match": "\\\\(?:[0-7]{1,3}|x[\\da-fA-F]{1,2}|.)",
-                "name": "constant.character.escape.imba"
-            }]
-		},
-		"nest_curly_and_self": {
-			"patterns": [{
-                "patterns": [{ "include": "#nest_curly_and_self" }],
-                "end": "\\}",
-                "begin": "\\{",
-                "captures": {
-                    "0": {"name": "punctuation.section.scope.imba"}
-                }
-            },{
-                "include": "$self"
-            }]
-		},
-		"interpolated_imba": {
-			"patterns": [{
-                "patterns": [
-                    { "include": "#nest_curly_and_self"},
-                    { "include": "$self"}
-                ],
-                "name": "source.imba.embedded.source",
-                "end": "\\}",
-                "begin": "\\{",
-                "captures": {
-                    "0": {"name": "punctuation.section.embedded.imba"}
-                }
-            }]
-		},
-		"embedded_comment": {
-			"patterns": [{
-                "match": "(#)\\s+(.*)$\n?",
-                "name": "comment.line.imba",
-                "captures": {
-                    "1": {"name": "punctuation.definition.comment.imba"}
-                }
-            }]
-		}
-	},
-	"scopeName": "source.imba",
-	"patterns": [{
-        "name": "meta.import.imba",
-        "begin": "^(import)(?=( +|$))",
-        "beginCaptures": { "1": {"name": "keyword.control.import.imba"} },
-        "patterns": [{
-            "name": "keyword.control.from.imba",
-            "match": "from"
-        },{
-            "include": "$self"
-        }],
-        "end": "\n"
-    },{
-        "name": "comment.block.imba",
-        "end": "###(?:[ \t]*\n)",
-        "begin": "^[ \t]*###",
-        "captures": {
-            "0": {"name": "punctuation.definition.comment.imba"}
+  "repository": {
+    "nest_curly": {
+      "patterns": [
+        {
+          "patterns": [
+            {
+              "include": "#nest_curly"
+            }
+          ],
+          "end": "\\}",
+          "begin": "\\{",
+          "captures": {
+            "0": {
+              "name": "punctuation.section.scope.imba"
+            }
+          }
         }
-    },{
-        "match": "(?:^[ \t]+)?(#\\s).*$\n?",
-        "name": "comment.line.imba"
-    },{
-        "begin": "'",
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.string.begin.imba"}
+      ]
+    },
+    "selector_content": {
+      "patterns": [
+        {
+          "match": "\\.[A-Za-z_\\-][\\w_\\-\\d]*\\b",
+          "name": "meta.selector.class.imba"
+        }
+      ]
+    },
+    "regex_content": {
+      "patterns": [
+        {
+          "match": "GROUP",
+          "name": "string.regex.group.imba"
         },
-        
-        "patterns": [],
-        "name": "string.quoted.single.imba",
-        "end": "'",
-        "endCaptures": {
-            "0": {"name": "punctuation.definition.string.end.imba"}
+        {
+          "match": "\\\\([0-7]{1,3}|x[\\da-fA-F]{1,2}|\\/|.)",
+          "name": "string.regex.escaped.imba"
         }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.string.begin.imba"}
+      ]
+    },
+    "tag_imba": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.class.evaled.imba",
+          "end": "\\}",
+          "begin": "\\.\\{",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
         },
-        "begin": "\"",
-        "patterns": [{ "include": "#interpolated_imba" }],
-        "name": "string.quoted.double.imba",
-        "end": "\"",
-        "endCaptures": {
-            "0": {"name": "punctuation.definition.string.end.imba"}
-        }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.regex.end.imba"}
+        {
+          "name": "entity.name.tag.id.evaled.imba",
+          "end": "\\}",
+          "begin": "#\\{",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
         },
-        "begin": "(\\/{3})",
-        "patterns": [{ "include": "#embedded_comment" }],
-        "name": "string.regexp.multiline.imba",
-        "end": "(\\/{3})([imgy]{0,4})",
-        "endCaptures": {
-            "1": {"name": "punctuation.definition.regex.end.imba"},
-            "2": {"name": "string.regexp.flags.imba"}
-        }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.regex.begin.imba"}
+        {
+          "name": "entity.name.tag.object.imba",
+          "end": "\\]",
+          "begin": "\\[",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
         },
-        "begin": "(\\/)(?=[^\t\n]*\\/)",
-        "patterns": [{ "include": "#regex_content" }],
-        "name": "string.regexp.simple.imba",
-        "end": "(\\/)([imgy]{0,4})",
-        "endCaptures": {
-            "1": {"name": "punctuation.definition.regex.end.imba"},
-            "2": {"name": "string.regexp.flags.imba"}
-        }
-    },{
-        "match": "(\\<)(\\>)",
-        "name": "meta.tag.empty.imba",
-        "captures": {
-            "1": {"name": "punctuation.definition.tag.begin.imba"},
-            "2": {"name": "punctuation.definition.tag.end.imba"}
-        }
-    },{
-        "beginCaptures": {
-            "1": {"name": "punctuation.definition.tag.begin.imba"},
-            "2": {"name": "entity.name.tag.type.imba"}
+        {
+          "match": "#[a-z]*",
+          "name": "entity.name.tag.id.imba"
         },
-        "begin": "(\\<)(([A-Za-z\\-]+\\:|\\@|\\.|\\#)?([A-Za-z][a-z\\-\\d]*))",
-        "patterns": [{ "include": "#tag_imba" }],
-        "name": "meta.tag.imba",
-        "end": "(\\>)",
-        "endCaptures": {
-            "1": {"name": "punctuation.definition.tag.end.imba"}
-        }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.selector.begin.imba"}
+        {
+          "match": "\\.[A-Za-z\\-\\_\\d]*",
+          "name": "entity.name.tag.class.imba"
         },
-        "begin": "(\\$|%)\\(",
-        "patterns": [{ "include": "#selector_content" }],
-        "name": "meta.selector.imba.all",
-        "end": "\\)",
-        "endCaptures": {
-            "0": {"name": "punctuation.definition.selector.end.imba"}
-        }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.selector.begin.imba"}
+        {
+          "match": "\\@[A-Za-z\\-\\_\\d]*",
+          "name": "entity.name.tag.ref.imba"
         },
-        "begin": "(\\$\\$|%%)\\(",
-        "patterns": [{ "include": "#selector_content" }],
-        "name": "meta.selector.imba.first",
-        "end": "\\)",
-        "endCaptures": {
-            "0": {"name": "punctuation.definition.selector.close.imba"}
+        {
+          "name": "entity.other.attribute-name.imba",
+          "end": "((?=([\\w\\-\\_\\:]+)\\s*\\=)|(?=>))",
+          "begin": "[a-z\\-\\d]+(\\:[a-z\\-]+)?\\s*\\=",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
         }
-    },{
-        "beginCaptures": {
-            "0": {"name": "punctuation.definition.selector.begin.imba"}
+      ]
+    },
+    "escaped_char": {
+      "patterns": [
+        {
+          "match": "\\\\(?:[0-7]{1,3}|x[\\da-fA-F]{1,2}|.)",
+          "name": "constant.character.escape.imba"
+        }
+      ]
+    },
+    "nest_curly_and_self": {
+      "patterns": [
+        {
+          "patterns": [
+            {
+              "include": "#nest_curly_and_self"
+            }
+          ],
+          "end": "\\}",
+          "begin": "\\{",
+          "captures": {
+            "0": {
+              "name": "punctuation.section.scope.imba"
+            }
+          }
         },
-        "begin": "(%)(?=[\\w\\.])",
-        "patterns": [{ "include": "#selector_content" }],
-        "name": "meta.selector.single.imba",
-        "end": "(?=[\\s\n\\)\\}\\,])",
-        "endCaptures": {
-            "0": {"name": "punctuation.definition.selector.close.imba"}
+        {
+          "include": "$self"
         }
-    },{
-        "match": "(#[A-Za-z][A-Za-z\\d]*(-[A-Za-z\\d]+)*)",
-        "name": "meta.selector.id.imba",
-        "captures": {
-            "0": {"name": "entity.name.tag.html.id.imba"}
+      ]
+    },
+    "interpolated_imba": {
+      "patterns": [
+        {
+          "patterns": [
+            {
+              "include": "#nest_curly_and_self"
+            },
+            {
+              "include": "$self"
+            }
+          ],
+          "name": "source.imba.embedded.source",
+          "end": "\\}",
+          "begin": "\\{",
+          "captures": {
+            "0": {
+              "name": "punctuation.section.embedded.imba"
+            }
+          }
         }
-    },{
-        "match": "([ \t]*)(export\\s|extend\\s|global\\s)*(class)\\s+(([A-Z]\\w*\\.)*([A-Z]\\w*))(\\s*(<)\\s*(([A-Z]\\w*\\.)*([A-Z]\\w*)))?",
-        "name": "meta.class.imba",
-        "captures": {
-            "2": {"name": "keyword.control.access.imba"},
-            "3": {"name": "keyword.control.class.imba"},
-            "4": {"name": "entity.name.type.class.imba"},
-            "5": {"name": "entity.name.type.class.namespace.imba"},
-            "6": {"name": "entity.name.type.class.name.imba"},
-            "7": {"name": "meta.class.inheritance.imba"},
-            "8": {"name": "keyword.control.extends.imba"},
-            "9": {"name": "entity.other.inherited.class.imba"},
-            "10": {"name": "entity.other.inherited.class.namespace.imba"},
-            "11": {"name": "entity.other.inherited.class.name.imba"}
+      ]
+    },
+    "embedded_comment": {
+      "patterns": [
+        {
+          "match": "(#)\\s+(.*)$\n?",
+          "name": "comment.line.imba",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.imba"
+            }
+          }
         }
-    },{
-        "match": "([ \t]*)(export\\s|extend\\s|global\\s)*(tag)\\s+([A-Za-z\\-]+:)?(\\#?[A-Za-z\\-]+)(\\s*(<)\\s*(\\#?[a-z][a-z0-9_:\\-]*))?",
-        "name": "meta.tagdef.imba",
-        "captures": {
-            "2": {"name": "keyword.control.access.imba"},
-            "3": {"name": "keyword.control.class.imba"},
-            "4": {"name": "entity.name.type.tag.namespace.imba"},
-            "5": {"name": "entity.name.type.tag.name.imba"},
-            "6": {"name": "keyword.control.extends.imba"},
-            "7": {"name": "entity.other.superclass.imba"}
+      ]
+    }
+  },
+  "scopeName": "source.imba",
+  "patterns": [
+    {
+      "begin": "(^stylus)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.style.html"
         }
-    },{
-        "match": "\\s*(prop|attr) (([a-z\\_][\\w\\_]*)(\\-[\\d\\w\\_]+)*)?",
-        "name": "meta.property.imba",
-        "captures": {
-            "1": {"name": "keyword.control.property.imba"},
-            "2": {"name": "entity.name.property.imba"}
+      },
+      "end": "(?=^\\S)",
+      "patterns": [
+        {
+          "contentName": "source.stylus",
+          "begin": "($)",
+          "end": "(?=^\\S)",
+          "patterns": [
+            {
+              "include": "source.stylus"
+            }
+          ]
         }
-    },{
-        "beginCaptures": {
-            "0": {"name": "keyword.control.access.imba"},
-            "1": {"name": "meta.function.method.declaration.imba"},
-            "3": {"name": "keyword.control.def.imba"},
-            "4": {"name": "entity.name.function.imba"},
-            "5": {"name": "meta.function.owner.imba"}
+      ]
+    },
+    {
+      "begin": "(^less)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.style.html"
+        }
+      },
+      "end": "(?=^\\S)",
+      "patterns": [
+        {
+          "contentName": "source.css.less",
+          "begin": "($)",
+          "end": "(?=^\\S)",
+          "patterns": [
+            {
+              "include": "source.css.less"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "begin": "(^scss)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.style.html"
+        }
+      },
+      "end": "(?=^\\S)",
+      "patterns": [
+        {
+          "contentName": "source.css.scss",
+          "begin": "($)",
+          "end": "(?=^\\S)",
+          "patterns": [
+            {
+              "include": "source.css.scss"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "begin": "(^css)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.style.html"
+        }
+      },
+      "end": "(?=^\\S)",
+      "patterns": [
+        {
+          "contentName": "source.css",
+          "begin": "($)",
+          "end": "(?=^\\S)",
+          "patterns": [
+            {
+              "include": "source.css"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "begin": "(^sass)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.style.html"
+        }
+      },
+      "end": "(?=^\\S)",
+      "patterns": [
+        {
+          "contentName": "source.sass",
+          "begin": "($)",
+          "end": "(?=^\\S)",
+          "patterns": [
+            {
+              "include": "source.sass"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "meta.import.imba",
+      "begin": "^(import)(?=( +|$))",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.import.imba"
+        }
+      },
+      "patterns": [
+        {
+          "name": "keyword.control.from.imba",
+          "match": "from"
         },
-        "begin": "^([ \t]*)(local\\s|export\\s|global\\s|var\\s)*(def)\\s(([A-Za-z][A-Za-z0-9_]*[\\.\\#])?([A-Za-z\\_][A-Za-z0-9_\\-]*[\\=\\?\\!]?))(?=([\\s\t]|$))",
-        "patterns": [{ "include": "$self" }],
-        "name": "meta.function.method.imba",
-        "end": "($|\\b(do)\\b)",
-        "endCaptures": {
-            "2": {"name": "keyword.control.def.block.imba"}
-        },
-        "contentName": "variable.parameter.function.imba"
-    },{
-        "match": "\\b(initialize|new|include|extend|raise|private|public|protected|prop|property)\\b",
-        "name": "keyword.other.special.method.imba"
-    },{
-        "match": "\\b(log|setInterval|setTimeout|isNaN|clearInterval|clearTimeout)\\b",
-        "name": "support.function.imba"
-    },{
-        "match": "(\\$\\d+)",
-        "name": "support.variable.imba"
-    },{
-        "match": "(\\.)@[A-Z\\_a-z\\d][\\w\\_\\d]*(\\-[A-Z\\_a-z\\d]+)*",
-        "name": "accessor.ivar.imba",
-        "captures": {
-            "0": {"name": "variable.instance.imba"},
-            "1": {"name": "punctuation.access.ivar.imba"}
+        {
+          "include": "$self"
         }
-    },{
-        "match": "(\\.)(new|include|extend)",
-        "name": "accessor.method.special.imba",
-        "captures": {
-            "0": { "name": "identifier.method.imba"},
-            "1": { "name": "punctuation.access.method.imba"},
-            "2": {"name": "keyword.other.special.method.imba"}}
-    },{
-        "match": "(\\.)[a-z\\_][\\w\\_]*(\\-[A-Z\\_a-z\\d]+)*",
-        "name": "accessor.method.regular.imba",
-        "captures": {
-            "0": {"name": "identifier.method.imba"},
-            "1": {"name": "punctuation.access.method.imba" }}
-    },{
-        "match": "(\\.)[A-Z\\_]+([A-Za-z\\d]+)*",
-        "name": "accessor.class.imba",
-        "captures": {
-            "0": {"name": "identifier.class.imba"},
-            "1": {"name": "punctuation.access.class.imba" }}
-    },{
-        "beginCaptures": {
-            "1": {"name": "keyword.control.block.imba"},
-            "2": {"name": "variable.parameter.function.imba" }},
-        "begin": "\\b(do)\\s*(\\|)",
-        "patterns": [{ "include": "$self" }],
-        "name": "meta.function.block.params.imba",
-        "end": "(\\|)",
-        "endCaptures": {
-            "1": {"name": "variable.parameter.function.imba" }},
-        "contentName": "variable.parameter.function.imba"
-    },{
-        "match": "\\b(do)\\b",
-        "name": "meta.function.block.paramless.imba",
-        "captures": {
-            "1": {"name": "keyword.control.block.imba" }}
-    },{
-        "match": "@[A-Z\\_a-z\\d]+(\\-[A-Z\\_a-z\\d]+)*",
-        "name": "variable.instance.imba"
-    },{
-        "match": "self",
-        "name": "variable.language.scope.self.imba"
-    },{
-        "match": "this",
-        "name": "variable.language.scope.this.imba"
-    },{
-        "match": "(begin|continue|class|tag|if|else|elif|for|own|of|in|isa|instanceof|typeof|module|then|unless|until|switch|try|finally|catch|when|while|loop|break|return|throw|await|extern|delete)\\b",
-        "name": "keyword.control.imba"
-    },{
-        "match": "\\b(require|global|super|export|import)\\b",
-        "name": "keyword.special.imba"
-    },{
-        "match": "\\b(var|let)\\b",
-        "name": "keyword.control.var.imba"
-    },{
-        "match": "\\d+\\.\\d+",
-        "name": "constant.numeric.float.imba"
-    },{
-        "match": "(\\b[0-9]+)",
-        "name": "constant.numeric.integer.imba"
-    },{
-        "match": "\\b(yes|no|true|false)\\b",
-        "name": "constant.language.boolean.imba"
-    },{
-        "match": "\\b(undefined|null|nil)\\b",
-        "name": "constant.language.other.imba"
-    },{
-        "match": "\\u03c0",
-        "name": "constant.language.math.imba"
-    },{
-        "match": "[\\w\\_]+(\\-[\\w\\d\\_]+)*[\\?\\!]?\\:(\\s|\\[|$)",
-        "name": "meta.object-literal.key.imba"
-    },{
-        "match": "\\b([A-Z\\_]+)\\b",
-        "name": "identifier.const.imba"
-    },{
-        "match": "[A-Z]+([A-Za-z\\d]+)?",
-        "name": "entity.name.type.class.imba"
-    },{
-        "match": "\\:[\\w\\d\\_]+(\\-[\\w\\d\\_]+)*[\\?\\!\\=]?",
-        "name": "identifier.symbol.imba"
-    },{
-        "match": "[a-z_A-Z][\\_\\w\\d]*(\\-[_\\d\\w]+)?",
-        "name": "identifier.basic.imba"
-    },{
-        "match": "\\bnot\\b| in ",
-        "name": "keyword.operator.expression.imba"
-    },{
-        "match": "<=>|<(?!<|=)|>(?!<|=|>)|<=|>=| is | isnt | not |===|==|\\?=|=~|!=|!~\\?|\\u2264|\\u2265|\\u2261|\\u2248",
-        "name": "keyword.operator.comparison.imba"
-    },{
-        "match": "&&| and |\\|\\|| or |\\^|\\s:\\\\s|\\?\\|{1,2}|\\?\\&{1,2}|[\\?\\&]\\>|\\u2229|\\u222a|\\u2208|\\u2209|\\u220b|\\u220c",
-        "name": "keyword.operator.logical.imba"
-    },{
-        "match": "(%|&|\\*\\*|\\*|\\+|\\-|\\/|\\u00d7|\\u00f7|\\u221a)",
-        "name": "keyword.operator.arithmetic.imba"
-    },{
-        "match": "\\=|\\?\\=|\\&\\&?\\=",
-        "name": "keyword.operator.assignment.imba"
-    },{
-        "match": "\\{|\\}",
-        "name": "punctuation.section.scope.imba"
-    },{
-        "match": "\\[|\\]",
-        "name": "punctuation.section.array.imba"
-    },{
-        "match": "\\(|\\)",
-        "name": "punctuation.section.function.imba"
-    },{
-        "match": "^([ \t]+)",
-        "name": "meta.indent.imba"
-    }],
-	"name": "Imba",
-	"fileTypes": [ "imba" ],
-	"uuid": "af5d7d71-7c4e-43d9-b91e-dce3f02c3c32"
+      ],
+      "end": "\n"
+    },
+    {
+      "name": "comment.block.imba",
+      "end": "###(?:[ \t]*\n)",
+      "begin": "^[ \t]*###",
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.imba"
+        }
+      }
+    },
+    {
+      "match": "(?:^[ \t]+)?(#\\s).*$\n?",
+      "name": "comment.line.imba"
+    },
+    {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.imba"
+        }
+      },
+      "patterns": [],
+      "name": "string.quoted.single.imba",
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.imba"
+        }
+      },
+      "begin": "\"",
+      "patterns": [
+        {
+          "include": "#interpolated_imba"
+        }
+      ],
+      "name": "string.quoted.double.imba",
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.regex.end.imba"
+        }
+      },
+      "begin": "(\\/{3})",
+      "patterns": [
+        {
+          "include": "#embedded_comment"
+        }
+      ],
+      "name": "string.regexp.multiline.imba",
+      "end": "(\\/{3})([imgy]{0,4})",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regex.end.imba"
+        },
+        "2": {
+          "name": "string.regexp.flags.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.regex.begin.imba"
+        }
+      },
+      "begin": "(\\/)(?=[^\t\n]*\\/)",
+      "patterns": [
+        {
+          "include": "#regex_content"
+        }
+      ],
+      "name": "string.regexp.simple.imba",
+      "end": "(\\/)([imgy]{0,4})",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regex.end.imba"
+        },
+        "2": {
+          "name": "string.regexp.flags.imba"
+        }
+      }
+    },
+    {
+      "match": "(\\<)(\\>)",
+      "name": "meta.tag.empty.imba",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.imba"
+        },
+        "2": {
+          "name": "punctuation.definition.tag.end.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.imba"
+        },
+        "2": {
+          "name": "entity.name.tag.type.imba"
+        }
+      },
+      "begin": "(\\<)(([A-Za-z\\-]+\\:|\\@|\\.|\\#)?([A-Za-z][a-z\\-\\d]*))",
+      "patterns": [
+        {
+          "include": "#tag_imba"
+        }
+      ],
+      "name": "meta.tag.imba",
+      "end": "(\\>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.begin.imba"
+        }
+      },
+      "begin": "(\\$|%)\\(",
+      "patterns": [
+        {
+          "include": "#selector_content"
+        }
+      ],
+      "name": "meta.selector.imba.all",
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.end.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.begin.imba"
+        }
+      },
+      "begin": "(\\$\\$|%%)\\(",
+      "patterns": [
+        {
+          "include": "#selector_content"
+        }
+      ],
+      "name": "meta.selector.imba.first",
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.close.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.begin.imba"
+        }
+      },
+      "begin": "(%)(?=[\\w\\.])",
+      "patterns": [
+        {
+          "include": "#selector_content"
+        }
+      ],
+      "name": "meta.selector.single.imba",
+      "end": "(?=[\\s\n\\)\\}\\,])",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.selector.close.imba"
+        }
+      }
+    },
+    {
+      "match": "(#[A-Za-z][A-Za-z\\d]*(-[A-Za-z\\d]+)*)",
+      "name": "meta.selector.id.imba",
+      "captures": {
+        "0": {
+          "name": "entity.name.tag.html.id.imba"
+        }
+      }
+    },
+    {
+      "match": "([ \t]*)(export\\s|extend\\s|global\\s)*(class)\\s+(([A-Z]\\w*\\.)*([A-Z]\\w*))(\\s*(<)\\s*(([A-Z]\\w*\\.)*([A-Z]\\w*)))?",
+      "name": "meta.class.imba",
+      "captures": {
+        "2": {
+          "name": "keyword.control.access.imba"
+        },
+        "3": {
+          "name": "keyword.control.class.imba"
+        },
+        "4": {
+          "name": "entity.name.type.class.imba"
+        },
+        "5": {
+          "name": "entity.name.type.class.namespace.imba"
+        },
+        "6": {
+          "name": "entity.name.type.class.name.imba"
+        },
+        "7": {
+          "name": "meta.class.inheritance.imba"
+        },
+        "8": {
+          "name": "keyword.control.extends.imba"
+        },
+        "9": {
+          "name": "entity.other.inherited.class.imba"
+        },
+        "10": {
+          "name": "entity.other.inherited.class.namespace.imba"
+        },
+        "11": {
+          "name": "entity.other.inherited.class.name.imba"
+        }
+      }
+    },
+    {
+      "match": "([ \t]*)(export\\s|extend\\s|global\\s)*(tag)\\s+([A-Za-z\\-]+:)?(\\#?[A-Za-z\\-]+)(\\s*(<)\\s*(\\#?[a-z][a-z0-9_:\\-]*))?",
+      "name": "meta.tagdef.imba",
+      "captures": {
+        "2": {
+          "name": "keyword.control.access.imba"
+        },
+        "3": {
+          "name": "keyword.control.class.imba"
+        },
+        "4": {
+          "name": "entity.name.type.tag.namespace.imba"
+        },
+        "5": {
+          "name": "entity.name.type.tag.name.imba"
+        },
+        "6": {
+          "name": "keyword.control.extends.imba"
+        },
+        "7": {
+          "name": "entity.other.superclass.imba"
+        }
+      }
+    },
+    {
+      "match": "\\s*(prop|attr) (([a-z\\_][\\w\\_]*)(\\-[\\d\\w\\_]+)*)?",
+      "name": "meta.property.imba",
+      "captures": {
+        "1": {
+          "name": "keyword.control.property.imba"
+        },
+        "2": {
+          "name": "entity.name.property.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.access.imba"
+        },
+        "1": {
+          "name": "meta.function.method.declaration.imba"
+        },
+        "3": {
+          "name": "keyword.control.def.imba"
+        },
+        "4": {
+          "name": "entity.name.function.imba"
+        },
+        "5": {
+          "name": "meta.function.owner.imba"
+        }
+      },
+      "begin": "^([ \t]*)(local\\s|export\\s|global\\s|var\\s)*(def)\\s(([A-Za-z][A-Za-z0-9_]*[\\.\\#])?([A-Za-z\\_][A-Za-z0-9_\\-]*[\\=\\?\\!]?))(?=([\\s\t]|$))",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
+      "name": "meta.function.method.imba",
+      "end": "($|\\b(do)\\b)",
+      "endCaptures": {
+        "2": {
+          "name": "keyword.control.def.block.imba"
+        }
+      },
+      "contentName": "variable.parameter.function.imba"
+    },
+    {
+      "match": "\\b(initialize|new|include|extend|raise|private|public|protected|prop|property)\\b",
+      "name": "keyword.other.special.method.imba"
+    },
+    {
+      "match": "\\b(log|setInterval|setTimeout|isNaN|clearInterval|clearTimeout)\\b",
+      "name": "support.function.imba"
+    },
+    {
+      "match": "(\\$\\d+)",
+      "name": "support.variable.imba"
+    },
+    {
+      "match": "(\\.)@[A-Z\\_a-z\\d][\\w\\_\\d]*(\\-[A-Z\\_a-z\\d]+)*",
+      "name": "accessor.ivar.imba",
+      "captures": {
+        "0": {
+          "name": "variable.instance.imba"
+        },
+        "1": {
+          "name": "punctuation.access.ivar.imba"
+        }
+      }
+    },
+    {
+      "match": "(\\.)(new|include|extend)",
+      "name": "accessor.method.special.imba",
+      "captures": {
+        "0": {
+          "name": "identifier.method.imba"
+        },
+        "1": {
+          "name": "punctuation.access.method.imba"
+        },
+        "2": {
+          "name": "keyword.other.special.method.imba"
+        }
+      }
+    },
+    {
+      "match": "(\\.)[a-z\\_][\\w\\_]*(\\-[A-Z\\_a-z\\d]+)*",
+      "name": "accessor.method.regular.imba",
+      "captures": {
+        "0": {
+          "name": "identifier.method.imba"
+        },
+        "1": {
+          "name": "punctuation.access.method.imba"
+        }
+      }
+    },
+    {
+      "match": "(\\.)[A-Z\\_]+([A-Za-z\\d]+)*",
+      "name": "accessor.class.imba",
+      "captures": {
+        "0": {
+          "name": "identifier.class.imba"
+        },
+        "1": {
+          "name": "punctuation.access.class.imba"
+        }
+      }
+    },
+    {
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.block.imba"
+        },
+        "2": {
+          "name": "variable.parameter.function.imba"
+        }
+      },
+      "begin": "\\b(do)\\s*(\\|)",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
+      "name": "meta.function.block.params.imba",
+      "end": "(\\|)",
+      "endCaptures": {
+        "1": {
+          "name": "variable.parameter.function.imba"
+        }
+      },
+      "contentName": "variable.parameter.function.imba"
+    },
+    {
+      "match": "\\b(do)\\b",
+      "name": "meta.function.block.paramless.imba",
+      "captures": {
+        "1": {
+          "name": "keyword.control.block.imba"
+        }
+      }
+    },
+    {
+      "match": "@[A-Z\\_a-z\\d]+(\\-[A-Z\\_a-z\\d]+)*",
+      "name": "variable.instance.imba"
+    },
+    {
+      "match": "self",
+      "name": "variable.language.scope.self.imba"
+    },
+    {
+      "match": "this",
+      "name": "variable.language.scope.this.imba"
+    },
+    {
+      "match": "(begin|continue|class|tag|if|else|elif|for|own|of|in|isa|instanceof|typeof|module|then|unless|until|switch|try|finally|catch|when|while|loop|break|return|throw|await|extern|delete)\\b",
+      "name": "keyword.control.imba"
+    },
+    {
+      "match": "\\b(require|global|super|export|import)\\b",
+      "name": "keyword.special.imba"
+    },
+    {
+      "match": "\\b(var|let)\\b",
+      "name": "keyword.control.var.imba"
+    },
+    {
+      "match": "\\d+\\.\\d+",
+      "name": "constant.numeric.float.imba"
+    },
+    {
+      "match": "(\\b[0-9]+)",
+      "name": "constant.numeric.integer.imba"
+    },
+    {
+      "match": "\\b(yes|no|true|false)\\b",
+      "name": "constant.language.boolean.imba"
+    },
+    {
+      "match": "\\b(undefined|null|nil)\\b",
+      "name": "constant.language.other.imba"
+    },
+    {
+      "match": "\\u03c0",
+      "name": "constant.language.math.imba"
+    },
+    {
+      "match": "[\\w\\_]+(\\-[\\w\\d\\_]+)*[\\?\\!]?\\:(\\s|\\[|$)",
+      "name": "meta.object-literal.key.imba"
+    },
+    {
+      "match": "\\b([A-Z\\_]+)\\b",
+      "name": "identifier.const.imba"
+    },
+    {
+      "match": "[A-Z]+([A-Za-z\\d]+)?",
+      "name": "entity.name.type.class.imba"
+    },
+    {
+      "match": "\\:[\\w\\d\\_]+(\\-[\\w\\d\\_]+)*[\\?\\!\\=]?",
+      "name": "identifier.symbol.imba"
+    },
+    {
+      "match": "[a-z_A-Z][\\_\\w\\d]*(\\-[_\\d\\w]+)?",
+      "name": "identifier.basic.imba"
+    },
+    {
+      "match": "\\bnot\\b| in ",
+      "name": "keyword.operator.expression.imba"
+    },
+    {
+      "match": "<=>|<(?!<|=)|>(?!<|=|>)|<=|>=| is | isnt | not |===|==|\\?=|=~|!=|!~\\?|\\u2264|\\u2265|\\u2261|\\u2248",
+      "name": "keyword.operator.comparison.imba"
+    },
+    {
+      "match": "&&| and |\\|\\|| or |\\^|\\s:\\\\s|\\?\\|{1,2}|\\?\\&{1,2}|[\\?\\&]\\>|\\u2229|\\u222a|\\u2208|\\u2209|\\u220b|\\u220c",
+      "name": "keyword.operator.logical.imba"
+    },
+    {
+      "match": "(%|&|\\*\\*|\\*|\\+|\\-|\\/|\\u00d7|\\u00f7|\\u221a)",
+      "name": "keyword.operator.arithmetic.imba"
+    },
+    {
+      "match": "\\=|\\?\\=|\\&\\&?\\=",
+      "name": "keyword.operator.assignment.imba"
+    },
+    {
+      "match": "\\{|\\}",
+      "name": "punctuation.section.scope.imba"
+    },
+    {
+      "match": "\\[|\\]",
+      "name": "punctuation.section.array.imba"
+    },
+    {
+      "match": "\\(|\\)",
+      "name": "punctuation.section.function.imba"
+    },
+    {
+      "match": "^([ \t]+)",
+      "name": "meta.indent.imba"
+    }
+  ],
+  "name": "Imba",
+  "fileTypes": [
+    "imba"
+  ],
+  "uuid": "af5d7d71-7c4e-43d9-b91e-dce3f02c3c32"
 }
