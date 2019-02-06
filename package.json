@@ -1,65 +1,70 @@
 {
-    "name": "imba",
-    "displayName": "vscode-imba",
-    "description": "Language support for Imba",
-    "version": "0.4.0",
-    "publisher": "scrimba",
-    "main": "./client/index.js",
-    "icon": "assets/imba.png",
-    "license": "MIT",
-    "author": "Sindre Aarsaether",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Languages"
-    ],
-    "activationEvents": [
-        "onLanguage:imba"
-    ],
-    "contributes": {
-        "configuration": {
-            "type": "object",
-            "title": "Example configuration",
-            "properties": {
-                "imba.maxNumberOfProblems": {
-                    "type": "number",
-                    "default": 100,
-                    "description": "Controls the maximum number of problems produced by the server."
-                }
-            }
-        },
-        "languages": [
-            {
-                "id": "imba",
-                "aliases": [
-                    "Imba",
-                    "imba"
-                ],
-                "extensions": [
-                    ".imba"
-                ],
-                "configuration": "./language-configuration.json",
-                "firstLine": "^#!/.*\\bimba[0-9.-]*\\b"
-            }
-        ],
-        "grammars": [
-            {
-                "language": "imba",
-                "scopeName": "source.imba",
-                "path": "./syntaxes/imba.tmLanguage.json"
-            }
-        ],
-        "themes": [
-            {
-                "label": "Imba Dark",
-                "uiTheme": "vs-dark",
-                "path": "./themes/ImbaDark.json"
-            }
-        ]
-    },
-    "dependencies": {
-        "imba": "1.4.0",
-        "vscode-languageserver": "^2.6.2"
-    }
+	"name": "imba",
+	"displayName": "vscode-imba",
+	"description": "Language support for Imba",
+	"version": "0.4.0",
+	"publisher": "scrimba",
+	"main": "./client/index.js",
+	"icon": "assets/imba.png",
+	"license": "MIT",
+	"author": "Sindre Aarsaether",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Languages"
+	],
+	"activationEvents": [
+		"onLanguage:imba"
+	],
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"imba.maxNumberOfProblems": {
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "imba",
+				"aliases": [
+					"Imba",
+					"imba"
+				],
+				"extensions": [
+					".imba"
+				],
+				"configuration": "./language-configuration.json",
+				"firstLine": "^#!/.*\\bimba[0-9.-]*\\b"
+			}
+		],
+		"grammars": [
+			{
+				"language": "imba",
+				"scopeName": "source.imba",
+				"path": "./syntaxes/imba.tmLanguage.json"
+			}
+		],
+		"themes": [
+			{
+				"label": "Imba Dark",
+				"uiTheme": "vs-dark",
+				"path": "./themes/ImbaDark.json"
+			}
+		]
+	},
+	"dependencies": {
+		"imba": "1.4.0",
+		"vscode-languageserver": "^2.6.2"
+	},
+	"__metadata": {
+		"id": "c0926dfb-bf29-4689-849e-63ca645e2c1c",
+		"publisherDisplayName": "Scrimba",
+		"publisherId": "d9260c1d-7c6a-483e-ae32-9e6d2314dff0"
+	}
 }
