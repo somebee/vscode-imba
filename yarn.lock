@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-imba@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/imba/-/imba-1.4.0.tgz#10db820b992ddb489acc23c157bfeffc2449f134"
-  integrity sha512-aIXF16PX7rOIHsOAJbf/kU0UP2KuHtb5A+IpRXfanJWo2A77U1lyfNkrUmCVfcflIL7KuZrXqkSQVHydDhTKVg==
+imba@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/imba/-/imba-1.4.3.tgz#0b5e9540f3b7e8dc63d07763ef7edd00d71b290a"
+  integrity sha512-QGJwF0ZGS5by4GdZltONcHN5sSbgtis2/O/vkrjvvD3gNgzvSXL5kLd0hL4Cyspkgv4uHd0TdCGcn32nmcGFLw==
 
 vscode-jsonrpc@^2.4.0:
   version "2.4.0"

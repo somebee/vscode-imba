@@ -1,7 +1,7 @@
 {
   "name": "imba-language-server",
   "description": "imba-language-server",
-  "version": "0.3.0",
+  "version": "0.4.3",
   "author": "Sindre Aarsaether <sindre@identu.no>",
   "license": "MIT",
   "main": "index.js",
@@ -16,7 +16,7 @@
     "bin"
   ],
   "dependencies": {
-    "imba": "1.4.0",
+    "imba": "1.4.3",
     "vscode-languageserver": "^3.4.2",
     "vscode-uri": "^1.0.1"
   },

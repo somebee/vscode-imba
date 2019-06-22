@@ -1,7 +1,7 @@
 {
   "name": "imba-client",
   "description": "imba language client",
-  "version": "0.3.0",
+  "version": "0.4.3",
   "author": "Sindre Aarsaether <sindre@identu.no>",
   "engines": {
     "vscode": "^1.16.0"
@@ -10,7 +10,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "imba": "1.4.0",
+    "imba": "1.4.3",
     "vscode-languageclient": "^3.4.2",
     "vscode-languageserver-types": "^3.4.0"
   },

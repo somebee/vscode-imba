@@ -47,6 +47,12 @@ export def activate context
 	
 	var client = LanguageClient.new('imba', 'Imba Language Server', serverOptions, clientOptions)
 	var disposable = client.start
+	
+	var type = window.createTextEditorDecorationType({
+		light: {color: '#509DB5'},
+		dark: {color: '#dbdcb2'},
+		rangeBehavior: 1
+	})
 
 	context:subscriptions.push(disposable)
 	
@@ -64,19 +70,17 @@ export def activate context
 			}
 
 			var decorations = for marker in markers
-				let color = styles[marker:type] or styles[marker:scope] or ['#dcdbc7','#509DB5']
+				let color = styles[marker:type] or styles[marker:scope]
+				
 				{
 					range: marker:range
 					hoverMessage: "variable {marker:name}"
-					renderOptions: {
-						dark: {color: color[0]} # f3f1d5
-						light: {color: color[1]}
-						rangeBehavior: 1
-					}
+					renderOptions: color ? {dark: {color: color[0]}, light: {color: color[1]}, rangeBehavior: 1} : null
 				}
 			
 			# console.log "client.onNotification entities",uri,markers,decorations,version
-			editor.setDecorations("imba", decorations)
+			# console.log "decorations",decorations
+			editor.setDecorations(type, decorations)
 			
 	
 	# set language configuration
