@@ -8,6 +8,10 @@
     "icon": "assets/imba.png",
     "license": "MIT",
     "author": "Sindre Aarsaether",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/somebee/vscode-imba.git"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
