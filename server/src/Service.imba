@@ -45,6 +45,12 @@ export class DocumentModel
 		analyze
 		return @meta
 
+	def handleSymbol sym, context
+		if sym:type == 'prop' or sym:type == 'attr'
+			addSymbol(SymbolKind.Property,sym:name,sym:loc)
+		elif sym:type == 'method'
+			addSymbol(SymbolKind.Method,sym:name,sym:loc)
+
 	def symbols
 		return @symbols if @symbols
 
@@ -66,14 +72,22 @@ export class DocumentModel
 
 			elif item:type == 'class'
 				let node = full[name]
-				let loc = node.name.region
+				# let loc = node.name.region
 				# console.log "found class",loc
+				let loc = item:loc
 				addSymbol(SymbolKind.Class,item:namepath,loc)
 			elif item:type == 'tag'
 				let node = full[name]
-				let loc = node.option('keyword').region
+				# let loc = node.option('keyword').region
+				let loc = item:loc
 				addSymbol(SymbolKind.Class,item:namepath,loc)
 
+			if item:symbols
+				for symbol in item:symbols
+					handleSymbol(symbol,item)
+
+		
+		console.log "found symbols!"
 		return @symbols
 
 		for scope in meta:scopes

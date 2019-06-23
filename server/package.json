@@ -16,7 +16,7 @@
     "bin"
   ],
   "dependencies": {
-    "imba": "1.4.3",
+    "imba": "^1.4.4",
     "vscode-languageserver": "^3.4.2",
     "vscode-uri": "^1.0.1"
   },

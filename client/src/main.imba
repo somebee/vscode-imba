@@ -20,7 +20,7 @@ var adapter = ClientAdapter.new
 			
 
 export def activate context
-	console.log "activated"
+	# console.log "activated"
 	
 	# setup language server
 	# var serverModule = require.resolve('imba-language-server')
@@ -57,8 +57,6 @@ export def activate context
 	context:subscriptions.push(disposable)
 	
 	client.onReady.then do
-		# console.log "client is ready!!"
-
 		client.onNotification('entities') do |uri,version,markers|
 			let editor = adapter.uriToEditor(uri,version)
 			
@@ -79,7 +77,6 @@ export def activate context
 				}
 			
 			# console.log "client.onNotification entities",uri,markers,decorations,version
-			# console.log "decorations",decorations
 			editor.setDecorations(type, decorations)
 			
 	
