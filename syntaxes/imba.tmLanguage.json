@@ -342,7 +342,7 @@
         "match": "\\b(require|global|super|export|import)\\b",
         "name": "keyword.special.imba"
     },{
-        "match": "\\b(var|let)\\b",
+        "match": "\\b(var|let|const)\\b",
         "name": "keyword.control.var.imba"
     },{
         "match": "\\d+\\.\\d+",

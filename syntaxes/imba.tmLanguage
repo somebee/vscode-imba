@@ -668,7 +668,7 @@
                 <key>name</key>
                 <string>keyword.control.var.imba</string>
                 <key>match</key>
-                <string>\b(var|let)\b</string>
+                <string>\b(var|let|const)\b</string>
             </dict>
             <dict>
                 <key>name</key>
