@@ -73,7 +73,7 @@ connection.onInitialize do |params|
 			# Tell the client that the server works in FULL text document sync mode
 			textDocumentSync: documents:syncKind,
 			completionProvider: false, # { resolveProvider: false, triggerCharacters: ['.', ':', '<', '"', '/', '@', '*'] },
-			signatureHelpProvider: { triggerCharacters: ['('] },
+			signatureHelpProvider: false, # { triggerCharacters: ['('] },
 			documentRangeFormattingProvider: false,
 			hoverProvider: false,
 			documentHighlightProvider: false,
