@@ -12,9 +12,9 @@ npm install -g lerna # yarn global add lerna
 npm run dev:bootstrap # yarn dev:bootstrap
 ```
 
-### Creating local version
+###  Creating a Local Version
 
-While you can build your changes manually and cove over files into your
+While you can build your changes manually and copy over files into your
 extension directory (`~/.vscode/extensions), it's easier to let the [VSCode
 Extension Manager][vem] do the grunt work:
 
