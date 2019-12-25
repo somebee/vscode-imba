@@ -11,11 +11,9 @@
   },
   "dependencies": {
     "imba": "^1.4.4",
-    "vscode-languageclient": "^3.4.2",
-    "vscode-languageserver-types": "^3.4.0"
+    "vscode-languageclient": "^5.2.1"
   },
   "devDependencies": {
-    "@types/node": "^6.0.51",
-    "vscode": "^1.1.5"
+    "@types/vscode": "^1.32.0"
   }
 }
