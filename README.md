@@ -1,6 +1,6 @@
 # VSCode Language Support for Imba
 
-To learn more about Imba visit [http://imba.io](https://imba.io)
+To learn more about Imba visit [https://imba.io](https://imba.io)
 
 ## Setting up Your Development Environment
 
