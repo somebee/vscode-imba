@@ -1,7 +1,5 @@
-# console.log("Hello from server!!")
-
-import createConnection, TextDocuments, InitializeParams, InitializeResult, DocumentRangeFormattingRequest, Disposable, DocumentSelector, RequestType from 'vscode-languageserver'
-import TextDocument, Diagnostic, Range, Position,DiagnosticSeverity,SymbolKind from 'vscode-languageserver-types'
+import createConnection, TextDocuments from 'vscode-languageserver'
+import DiagnosticSeverity from 'vscode-languageserver-types'
 import Uri from 'vscode-uri'
 
 import Service from './Service'
@@ -63,14 +61,20 @@ var documents = TextDocuments.new
 documents.listen(connection)
 
 var service = Service.new(connection,documents)
+var workspaceFolder
+
+documents.onDidOpen do |event|
+	connection:console.log("[Server(${process:pid}) ${workspaceFolder}] Document opened: {event:document:uri}")
+documents.listen(connection)
 
 connection.onInitialize do |params|
-	console.log "connection.onInitialize"
-	# connection:console.log "hello?"
+	workspaceFolder = params:rootUri
+	connection:console.log("[Server({process:pid}) {workspaceFolder}] Started and initialize received")
 	
 	return {
 		capabilities: {
 			# Tell the client that the server works in FULL text document sync mode
+			# TODO(scanf): add support for the remaining below
 			textDocumentSync: documents:syncKind,
 			completionProvider: false, # { resolveProvider: false, triggerCharacters: ['.', ':', '<', '"', '/', '@', '*'] },
 			signatureHelpProvider: false, # { triggerCharacters: ['('] },
@@ -91,8 +95,6 @@ connection.onDidChangeConfiguration do |change|
 	console.log "connection.onDidChangeConfiguration"
 
 connection.onDocumentSymbol do |documentSymbolParms|
-	# var document = documents.get(documentSymbolParms:textDocument:uri)
-	# console.log "onDocumentSymbol!!!"
 	let uri = documentSymbolParms:textDocument:uri
 	let model = service.getModel(uri)
 	return model.symbols
