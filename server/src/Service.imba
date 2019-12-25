@@ -18,7 +18,7 @@ export class DocumentModel
 		@doc.getText
 
 	def analyze
-		if @version == @doc:version
+		if @version == @doc:version or body:length == 0
 			return self
 
 		console.log "analyze {uri}"
