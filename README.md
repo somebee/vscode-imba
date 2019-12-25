@@ -25,6 +25,12 @@ Extension Manager][vem] do the grunt work:
 0. Choose `Select from vsix...`. 
 0. Locate the `*.vsix` file generated above.
 
+Alternatively if you prefer the CLI use `code` command:
+
+```
+code --install-extension imba-*.vsix
+```
+
 **Enjoy!**
 
 [l]: https://lerna.js.org/
