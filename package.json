@@ -65,5 +65,9 @@
     "dependencies": {
         "imba": "^1.4.4",
         "vscode-languageserver": "^2.6.2"
+    },
+    "scripts": {
+        "dev:bootstrap": "lerna bootstrap",
+        "prod:version": "lerna bootstrap"
     }
 }
