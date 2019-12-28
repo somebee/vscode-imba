@@ -1,7 +1,0 @@
-.vscode/**
-client/node_modules/**
-*.swo
-*.swp
-*.vsix
-node_modules/**
-server/node_modules/**
