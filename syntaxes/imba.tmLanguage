@@ -493,7 +493,7 @@
                 <key>name</key>
                 <string>keyword.other.special.method.imba</string>
                 <key>match</key>
-                <string>\b(initialize|new|include|extend|raise|attr_reader|attr_writer|attr_accessor|attr|private|module_function|public|protected|prop|property)\b</string>
+                <string>\b(initialize|new|extend|raise|attr_reader|attr_writer|attr_accessor|attr|private|module_function|public|protected|prop|property)\b</string>
             </dict>
             <dict>
                 <key>name</key>
@@ -524,7 +524,7 @@
                 <key>name</key>
                 <string>accessor.method.special.imba</string>
                 <key>match</key>
-                <string>(\.)(new|include|extend)</string>
+                <string>(\.)(new|extend)</string>
                 <key>captures</key>
                 <dict>
                     <key>0</key>

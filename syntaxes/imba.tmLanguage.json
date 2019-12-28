@@ -276,7 +276,7 @@
         },
         "contentName": "variable.parameter.function.imba"
     },{
-        "match": "\\b(initialize|new|include|extend|raise|private|public|protected|prop|property)\\b",
+        "match": "\\b(initialize|new|extend|raise|private|public|protected|prop|property)\\b",
         "name": "keyword.other.special.method.imba"
     },{
         "match": "\\b(log|setInterval|setTimeout|isNaN|clearInterval|clearTimeout)\\b",
@@ -292,7 +292,7 @@
             "1": {"name": "punctuation.access.ivar.imba"}
         }
     },{
-        "match": "(\\.)(new|include|extend)",
+        "match": "(\\.)(new|extend)",
         "name": "accessor.method.special.imba",
         "captures": {
             "0": { "name": "identifier.method.imba"},
