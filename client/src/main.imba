@@ -1,9 +1,9 @@
 var path = require 'path'
 
-import window, languages, workspace, ExtensionContext, IndentAction, DecorationOptions, DecorationRenderOptions, Disposable, Range, TextDocument from 'vscode'
-# import { window, workspace, DecorationOptions, DecorationRenderOptions, Disposable, Range, TextDocument } from 'vscode';
-import LanguageClient, LanguageClientOptions, ServerOptions, TransportKind, Range, RequestType, RevealOutputChannelOn from 'vscode-languageclient'
+import window, languages, IndentAction from 'vscode'
+import LanguageClient, TransportKind, RevealOutputChannelOn from 'vscode-languageclient'
 
+# TODO(scanf): handle workspace folder and multiple client connections
 
 class ClientAdapter
 	
@@ -20,17 +20,12 @@ var adapter = ClientAdapter.new
 			
 
 export def activate context
-	# console.log "activated"
-	
-	# setup language server
-	# var serverModule = require.resolve('imba-language-server')
 	var serverModule = context.asAbsolutePath(path.join('server', 'index.js'))
 	var debugOptions = { execArgv: ['--nolazy', '--inspect=6005'] }
 	
 	console.log serverModule, debugOptions # , debugServerModule
 	
 	var serverOptions = {
-		# run: { module: serverModule, transport: TransportKind:ipc}
 		run: {module: serverModule, transport: TransportKind:ipc, options: debugOptions }
 		debug: {module: serverModule, transport: TransportKind:ipc, options: debugOptions }
 	}
@@ -76,7 +71,6 @@ export def activate context
 					renderOptions: color ? {dark: {color: color[0]}, light: {color: color[1]}, rangeBehavior: 1} : null
 				}
 			
-			# console.log "client.onNotification entities",uri,markers,decorations,version
 			editor.setDecorations(type, decorations)
 			
 	
