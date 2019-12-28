@@ -68,6 +68,6 @@
     },
     "scripts": {
         "dev:bootstrap": "lerna bootstrap",
-        "prod:version": "lerna bootstrap"
+        "prod:version": "lerna version"
     }
 }
