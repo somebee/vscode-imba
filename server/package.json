@@ -1,7 +1,7 @@
 {
   "name": "imba-language-server",
   "description": "imba-language-server",
-  "version": "0.5.1",
+  "version": "0.5.2-alpha.0",
   "author": "Sindre Aarsaether <sindre@identu.no>",
   "license": "MIT",
   "main": "index.js",
