@@ -23,10 +23,5 @@
   "devDependencies": {
     "glob": "^7.1.2",
     "source-map-support": "^0.4.15"
-  },
-  "scripts": {
-    "compile": "tsc",
-    "watch": "tsc --watch",
-    "test": "mocha"
   }
 }
