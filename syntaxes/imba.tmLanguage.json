@@ -114,14 +114,29 @@
     },{
         "name": "comment.block.imba",
         "end": "###(?:[ \t]*\n)",
-        "begin": "^[ \t]*###",
+        "begin": "^[ \t]*###\\S",
         "captures": {
             "0": {"name": "punctuation.definition.comment.imba"}
         }
     },{
         "match": "(?:^[ \t]+)?(#\\s).*$\n?",
         "name": "comment.line.imba"
-    },{
+    },
+    {
+        "patterns": [{"include": "source.css"}],
+        "begin": "^[ \t]*###\\scss",
+        "end": "###(?:[ \t]*\n)",
+        "beginCaptures": {
+            "0": {
+                "name": "punctuation.definition.string.begin.css"
+            }
+        },
+        "endCaptures": {
+            "0": {
+                "name": "punctuation.definition.string.end.css"
+            }
+        }
+     },{
         "begin": "'",
         "beginCaptures": {
             "0": {"name": "punctuation.definition.string.begin.imba"}
