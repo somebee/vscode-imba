@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.2
+
+* Highlight CSS blocks in comments.
+* Fix crash in empty Imba file.
+* Highlight `const` keyword.
+* Upgrade to Imba 1.5.2
+
 ## 0.5.1
 * Make symbols/outline view work correctly
 * Upgrade to Imba 1.4.4
