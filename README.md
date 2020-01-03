@@ -1,4 +1,6 @@
-# VSCode Language Support for Imba
+# ⛔️ [DEPRECATED] Please use https://github.com/imba/vscode-imba
+
+## VSCode Language Support for Imba
 
 To learn more about Imba visit [https://imba.io](https://imba.io)
 
